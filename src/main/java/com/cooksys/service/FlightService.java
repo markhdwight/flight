@@ -8,8 +8,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.cooksys.component.FlightGenerator;
-import com.cooksys.pojo.Flight;
-import com.cooksys.pojo.Trip;
+import com.cooksys.entity.Flight;
+import com.cooksys.entity.Trip;
 
 @Service
 public class FlightService {

@@ -1,17 +1,31 @@
-package com.cooksys.pojo;
+package com.cooksys.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Flight implements Comparable<Flight> {
 	
+	@Id
+	@GeneratedValue
+	private long flightId;
+	
 	//Name of city where flight originates
+	@Column
 	private String origin;
 	
 	//Name of city where flight lands
+	@Column
 	private String destination;
 	
 	//How many hours flight is in the air
+	@Column
 	private long flightTime;
 	
 	//How many hours after the start of the day until the flight takes off
+	@Column
 	private long offset;
 	
 	public String getOrigin() {
