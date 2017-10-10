@@ -11,24 +11,51 @@ class MapController {
     this.$map = $map
 
     // add markers from an angular constant
-    const { memphis, nashville, knoxville } = locations
-    const markers = [memphis, nashville, knoxville]
+    //const { memphis, nashville, knoxville } = locations
+    //const markers = [memphis, nashville, knoxville]
 
-    markers.forEach(marker => this.addMarker(marker))
+    //markers.forEach(marker => this.addMarker(marker))
 
     // add paths manually
-    const paths = [
+    //const paths = [
       //[memphis, nashville, '#CC0099'],
       //[nashville, knoxville, '#AA1100']
-    ]
+    //]
 
     paths.forEach(args => this.addPath(...args))
 
     // add path from webservice
     $map.getMarkerByCityName('Chattanooga')
-      .then(chattanooga => {
-        this.addPath(knoxville, chattanooga, '#FF3388')
+      .then(done => {
+        //this.addPath(knoxville, chattanooga, '#FF3388')
+        chattanooga = done.data
       })
+
+    $map.getMarkerByCityName('Memphis')
+      .then(done => {
+        memphis = done.data
+      })
+
+    $map.getMarkerByCityName('Nashville')
+      .then(done => {
+        nashville = done.data
+      })
+
+    $map.getMarkerByCityName('Knoxville')
+      .then(done => {
+        knoxville = done.data
+      })
+
+      const markers = [memphis, nashville, knoxville]
+      const paths = [
+        [memphis, nashville,'#CC0099'],
+        [nashville, knoxville, '#AA1100'],
+        [knoxville, chattanooga, '#FF3388']
+      ]
+
+      markers.forEach(marker => this.addMarker(marker))
+      paths.forEach(path => this.addPath(path))
+
   }
 
   addMarker ({ latitude, longitude }) {
