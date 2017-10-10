@@ -18,8 +18,8 @@ class MapController {
 
     // add paths manually
     const paths = [
-      [memphis, nashville, '#CC0099'],
-      [nashville, knoxville, '#AA1100']
+      //[memphis, nashville, '#CC0099'],
+      //[nashville, knoxville, '#AA1100']
     ]
 
     paths.forEach(args => this.addPath(...args))

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.cooksys.component.FlightGenerator;
 import com.cooksys.pojo.Flight;
+import com.cooksys.pojo.Trip;
 
 @Service
 public class FlightService {
@@ -31,12 +32,12 @@ public class FlightService {
 		Collections.sort(flightList);
 	}
 	
-	public ArrayList<ArrayList<Flight>> getValidTrips(String start,String end)
+	public ArrayList<Trip> getValidTrips(String start,String end)
 	{
 		if(start.equals(end))
 			return null;
 		
-		ArrayList<ArrayList<Flight>> trips = new ArrayList<ArrayList<Flight>>();
+		ArrayList<Trip> trips = new ArrayList<Trip>();
 		
 		for(Flight f : flightList)
 		{
@@ -45,18 +46,19 @@ public class FlightService {
 				if(f.getDestination().equals(start))	//avoid cycles
 					continue;
 				
-				ArrayList<Flight> trip = new ArrayList<Flight>();
-				trip.add(f);
+				Trip trip = new Trip();
+				trip.addStop(f);
 				
-				if(f.getDestination().equals(end))
+				if(f.getDestination().equals(end))	//checks to see if the current trip is a direct flight to the desired destination
 				{
 					trips.add(trip);
 				}
 				else
 				{
-					trip.addAll(findConnectingFlights(f.getOffset()+f.getFlightTime()+1,f.getDestination(),end));
+					trip = findConnectingFlights(f.getOffset()+f.getFlightTime()+1,f.getDestination(),end,trip);
+					//trip.addAll(findConnectingFlights(f.getOffset()+f.getFlightTime()+1,f.getDestination(),end));
 					
-					if(trip.get(trip.size()-1).getDestination().equals(end))	//Double check to make sure the planned route would reach the proper destination
+					if(trip.getLastStop().getDestination().equals(end))	//Double check to make sure the planned route would reach the proper destination
 					{
 						trips.add(trip);
 					}					
@@ -67,15 +69,15 @@ public class FlightService {
 		return trips;
 	}
 	
-	private ArrayList<Flight> findConnectingFlights(long earliestTime, String start, String end)
+	private Trip findConnectingFlights(long earliestTime, String start, String end, Trip trip)
 	{
-		ArrayList<Flight> tripSegment = new ArrayList<Flight>();
+		Trip tripSegment = trip;
 		
 		for(Flight f : flightList)
 		{
-			if(f.getOrigin().equals(start) && f.getOffset() >= earliestTime)
+			if(f.getOrigin().equals(start) && f.getOffset() >= earliestTime && !trip.contains(f.getDestination()))
 			{
-				tripSegment.add(f);
+				tripSegment.addStop(f);
 				
 				if(f.getDestination().equals(end))
 				{
@@ -83,8 +85,7 @@ public class FlightService {
 				}
 				else
 				{
-					tripSegment.addAll(findConnectingFlights(f.getOffset()+f.getFlightTime()+1,f.getDestination(),end));
-					return tripSegment;
+					return findConnectingFlights(f.getOffset()+f.getFlightTime()+1,f.getDestination(),end,tripSegment);
 				}
 			}
 		}

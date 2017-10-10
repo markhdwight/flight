@@ -4,7 +4,12 @@ import java.util.ArrayList;
 
 public class Trip {
 	
-	public ArrayList<Flight> flights;
+	private ArrayList<Flight> flights;
+	
+	public Trip()
+	{
+		flights = new ArrayList<Flight>();
+	}
 	
 	public long getTripDuration()
 	{
@@ -41,6 +46,16 @@ public class Trip {
 	public void addStop(Flight flight)
 	{
 		flights.add(flight);
+	}
+	
+	public int numStops()
+	{
+		return flights.size();
+	}
+
+	public Flight getLastStop() 
+	{
+		return flights.get(flights.size()-1);
 	}
 
 }
