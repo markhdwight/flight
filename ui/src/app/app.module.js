@@ -23,9 +23,9 @@ export default
     }
 
     const signUp = {
-      name: 'signUp',
-      url: '/signUp',
-      component: 'signUpComponent'
+      name: 'signup',
+      url: '/signup',
+      component: 'signupComponent'
     }
 
     const allFlights = {
@@ -35,6 +35,8 @@ export default
     }
 
     stateProvider.state(allFlights)
+    stateProvider.state(signUp)
+    stateProvider.state(login)
 
     urlRouter.otherwise('/allFlights')
   }])

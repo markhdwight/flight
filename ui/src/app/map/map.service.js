@@ -8,8 +8,15 @@ class MapService {
   getMarkerByCityName (name) {
     return this.$http
       .get(`${this.apiUrl}/location/name`, { params: { name } })
-      .then(result => result.data)
+        .then(result => result.data)
   }
+
+  getFlightPaths () {
+    return this.$http
+      .get(`${this.apiUrl}/flights/`)
+        .then(result => result.data)
+  }
+
 }
 
 export default MapService

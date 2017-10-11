@@ -33,6 +33,7 @@ public class FlightGenerator {
 
 			result.add(f);
 		}
+		//System.out.println("NEW FLIGHTS!");
 		return result;
 	}
 

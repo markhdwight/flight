@@ -18,8 +18,13 @@ import com.cooksys.service.UserAccountService;
 @CrossOrigin
 public class UserAccountController {
 	
-	@Autowired
-	UserAccountService userService;
+	//@Autowired
+	private UserAccountService userService;
+	
+	public UserAccountController()
+	{
+		
+	}
 
 	public UserAccountController(UserAccountService userService)
 	{

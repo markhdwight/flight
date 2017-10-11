@@ -14,6 +14,11 @@ public class UserAccountRepository {
 	
 	private EntityManager entityManager;
 	
+	public UserAccountRepository()
+	{
+		
+	}
+	
 	public UserAccountRepository(EntityManager entityManager)
 	{
 		this.entityManager = entityManager;

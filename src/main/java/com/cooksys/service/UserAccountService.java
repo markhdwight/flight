@@ -21,6 +21,11 @@ public class UserAccountService
 	
 	private EntityManager mgmt;
 
+	public UserAccountService()
+	{
+		
+	}
+	
 	public UserAccountService(EntityManager mgmt, UserAccountRepository userRepo, UserAccountJPARepository userJPARepo)
 	{
 		this.mgmt = mgmt;

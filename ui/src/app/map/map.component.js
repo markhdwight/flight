@@ -6,80 +6,66 @@ class MapController {
   center = [35.5175, -86.5804]
   markers = []
   paths = []
-  chattanooga = {
-    latitude:0,
-    longitude:0
-  }
-  memphis = {
-    latitude:0,
-    longitude:0
-  }
-  nashville = {
-    latitude:0,
-    longitude:0
-  }
-  knoxville = {
-    latitude:0,
-    longitude:0
-  }
 
   constructor ($map, locations) {
     this.$map = $map
 
     
     // add markers from an angular constant
-    //const { memphis, nashville, knoxville } = locations
-    //const markers = [memphis, nashville, knoxville]
+    const { chatanooga, memphis, nashville, knoxville } = locations
+    const cities = {
+      'Chatanooga':chatanooga,
+      'Memphis':memphis,
+      'Nashville':nashville,
+      'Knoxville':knoxville
+    }
 
-    //markers.forEach(marker => this.addMarker(marker))
+    console.log(cities['Chatanooga'])
 
-    // add paths manually
-    //const paths = [
-      //[memphis, nashville, '#CC0099'],
-      //[nashville, knoxville, '#AA1100']
-    //]
-
-    //paths.forEach(args => this.addPath(...args))
+    let flightColors = ['#CC0099','#AA1100','#FF3388','#333388','#572072']
 
     // add path from webservice   
     $map.getMarkerByCityName('Chattanooga')
-      .then(done => {
+      .then((done) => {
         //this.addPath(knoxville, chattanooga, '#FF3388')
-        this.chattanooga.latitute = done.latitude
-        //alert(chattanooga.latitude)
-        //alert(done.latitude)
-        this.chattanooga.longitude = done.longitude
+        this.addMarker(done)
       })
-
-    //alert(this.chattanooga.latitude)
+      
 
     $map.getMarkerByCityName('Memphis')
-      .then(done => {
-        this.memphis.latitude = done.latitude
-        this.memphis.longitude = done.longitude
+      .then((done) => {
+        this.addMarker(done)
       })
+
 
     $map.getMarkerByCityName('Nashville')
-      .then(done => {
-        this.nashville.latitude = done.latitude
-        this.nashville.longitude = done.longitude
+      .then((done) => {
+        this.addMarker(done)
       })
+
 
     $map.getMarkerByCityName('Knoxville')
-      .then(done => {
-        this.knoxville.latitude = done.latitude
-        this.knoxville.longitude = done.longitude
+      .then((done) => {
+        this.addMarker(done)
       })
 
-      const markers = [this.memphis, this.nashville, this.knoxville]
-      const paths = [
+      $map.getFlightPaths()
+        .then((done) => {
+          let colorCount = 0
+          done.forEach((flight) => {
+            this.addPath(cities[flight.origin],cities[flight.destination],flightColors[colorCount++])
+          })
+        })
+
+      //const markers = [this.memphis, this.nashville, this.knoxville]
+      /*const paths = [
         [this.memphis, this.nashville,'#CC0099'],
         [this.nashville, this.knoxville, '#AA1100'],
         [this.knoxville, this.chattanooga, '#FF3388']
-      ]
+      ]*/
 
-      markers.forEach(marker => this.addMarker(marker))
-      paths.forEach(args => this.addPath(...args))
+      //markers.forEach(marker => this.addMarker(marker))
+      //paths.forEach(args => this.addPath(...args))
 
       // paths.forEach(path => this.addPath(path))
 

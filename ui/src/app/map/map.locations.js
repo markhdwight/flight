@@ -1,4 +1,10 @@
 export default {
+
+  chatanooga: {
+    latitude: 35.0457,
+    longitude: -85.3096
+  },
+
   memphis: {
     latitude: 35.1495,
     longitude: -90.0490

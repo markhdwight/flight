@@ -66,9 +66,9 @@ public class Flight implements Comparable<Flight> {
 		this.flightTime = flightTime;
 		this.offset = offset;
 	}
-	@Override
+	@Override	//Orders flights such that the earliest flight comes first
 	public int compareTo(Flight o) {
-		// TODO Auto-generated method stub
+		
 		if(this.offset < o.getOffset())
 			return -1;
 		else if(this.offset == o.getOffset())
