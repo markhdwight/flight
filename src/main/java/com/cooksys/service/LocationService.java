@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cooksys.entity.Location;
-import com.cooksys.repository.LocationRepository;
+import com.cooksys.repository.LocationJPARepository;
 
 @Service
 public class LocationService {
 	
 	@Autowired
-	LocationRepository repo;
+	LocationJPARepository repo;
 		
 	public List<Location> getAll()
 	{

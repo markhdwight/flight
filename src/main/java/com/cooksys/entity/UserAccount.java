@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.cooksys.pojo.Credentials;
+
 @Entity
 public class UserAccount {
 
@@ -27,9 +29,15 @@ public class UserAccount {
 	
 	public UserAccount()
 	{
-		
+		tripHistory = new ArrayList<Trip>();
 	}
 	
+	public UserAccount(Credentials credentials) {
+		tripHistory = new ArrayList<Trip>();
+		username = credentials.username;
+		password = credentials.password;
+	}
+
 	public Long getUserId()
 	{
 		return userId;

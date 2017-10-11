@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.cooksys.entity.Location;
 
 @Repository
-public interface LocationRepository extends JpaRepository<Location, Long> {
+public interface LocationJPARepository extends JpaRepository<Location, Long> {
 
 	Location findById(long id);
 	

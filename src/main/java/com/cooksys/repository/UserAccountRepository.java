@@ -1,13 +1,41 @@
 package com.cooksys.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Repository;
 
 import com.cooksys.entity.UserAccount;
 
-public interface UserAccountRepository extends JpaRepository<UserAccount, Long> {
+@Repository
+public class UserAccountRepository {
 	
-	UserAccount findByUserId(long userId);
+	private EntityManager entityManager;
 	
-	UserAccount findByUsername(String username);
+	public UserAccountRepository(EntityManager entityManager)
+	{
+		this.entityManager = entityManager;
+	}
+	
+	public List<UserAccount> getAllUsers()
+	{
+		return entityManager.createQuery("FROM UserAccount",UserAccount.class).getResultList();
+	}
+	
+	@Transactional
+	public UserAccount create(UserAccount user)
+	{
+		entityManager.persist(user);
+		return user;
+	}
+	
+	@Transactional
+	public UserAccount update(UserAccount user)
+	{
+		UserAccount result = entityManager.merge(user);
+		return user;
+	}
 
 }
