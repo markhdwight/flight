@@ -1,3 +1,4 @@
+import angular from 'angular';
 import './app/app.module'
 
 angular.module('flightApp', ['ui.router', 'ngCookies']).config(['$stateProvider', '$urlRouterProvider', function (stateProvider, urlRouter){

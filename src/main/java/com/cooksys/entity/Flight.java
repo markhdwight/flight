@@ -28,6 +28,13 @@ public class Flight implements Comparable<Flight> {
 	@Column
 	private long offset;
 	
+	
+	public long getFlightId() {
+		return flightId;
+	}
+	public void setFlightId(long flightId) {
+		this.flightId = flightId;
+	}
 	public String getOrigin() {
 		return origin;
 	}
