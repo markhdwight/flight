@@ -2,6 +2,9 @@ import flightMap from './map/map.module'
 import apiUrl from './api.url'
 import appComponent from './app.component.js'
 import mapComponent from './map/map.component.js'
+import signupComponent from './signup/signup.component.js'
+import loginComponent from './login/login.component.js'
+import bookFLightComponent from './bookFlight/bookFlight.component.js'
 
 export default
   angular
@@ -32,6 +35,12 @@ export default
       name:   'allFlights',
       url:    '/allFlights',
       component:  'mapComponent'
+    }
+
+    const bookFlight = {
+      name: 'bookFlight',
+      url:  '/bookFlight',
+      component: 'bookFlightComponent'
     }
 
     stateProvider.state(allFlights)

@@ -49,6 +49,7 @@ class MapController {
         this.addMarker(done)
       })
 
+      //Should add a path for each flight in the schedule
       $map.getFlightPaths()
         .then((done) => {
           let colorCount = 0
@@ -56,18 +57,6 @@ class MapController {
             this.addPath(cities[flight.origin],cities[flight.destination],flightColors[colorCount++])
           })
         })
-
-      //const markers = [this.memphis, this.nashville, this.knoxville]
-      /*const paths = [
-        [this.memphis, this.nashville,'#CC0099'],
-        [this.nashville, this.knoxville, '#AA1100'],
-        [this.knoxville, this.chattanooga, '#FF3388']
-      ]*/
-
-      //markers.forEach(marker => this.addMarker(marker))
-      //paths.forEach(args => this.addPath(...args))
-
-      // paths.forEach(path => this.addPath(path))
 
   }
 

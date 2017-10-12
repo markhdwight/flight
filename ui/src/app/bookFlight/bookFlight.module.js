@@ -1,6 +1,5 @@
-import allFlightsLocations from './allFlights.locations'
-import allFlightsComponent from './allFlights.component.js'
-import allFlightsService from './allFlights.service'
+import bookFlightComponent from './bookFlight.component.js'
+import bookFlightService from './bookFlight.service'
 
 export default
   angular
