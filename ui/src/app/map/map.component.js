@@ -12,15 +12,15 @@ class MapController {
 
     
     // add markers from an angular constant
-    const { chatanooga, memphis, nashville, knoxville } = locations
+    const { chattanooga, memphis, nashville, knoxville } = locations
     const cities = {
-      'Chatanooga':chatanooga,
+      'Chattanooga':chattanooga,
       'Memphis':memphis,
       'Nashville':nashville,
       'Knoxville':knoxville
     }
 
-    console.log(cities['Chatanooga'])
+    console.log(cities['Chattanooga'])
 
     let flightColors = ['#CC0099','#AA1100','#FF3388','#333388','#572072']
 
@@ -53,7 +53,10 @@ class MapController {
       $map.getFlightPaths()
         .then((done) => {
           let colorCount = 0
+          //console.log("help")
           done.forEach((flight) => {
+            console.log(flight.origin + " " +flight.destination)
+            //console.log(cities[flight.origin])
             this.addPath(cities[flight.origin],cities[flight.destination],flightColors[colorCount++])
           })
         })

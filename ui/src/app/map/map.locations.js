@@ -1,6 +1,6 @@
 export default {
 
-  chatanooga: {
+  chattanooga: {
     latitude: 35.0457,
     longitude: -85.3096
   },
