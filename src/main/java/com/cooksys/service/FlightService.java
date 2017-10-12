@@ -29,11 +29,11 @@ public class FlightService {
 	private void refreshFlights()
 	{
 		flightList = generator.generateNewFlightList();
-		Collections.sort(flightList);
+		Collections.sort(flightList);		//Sorts flight by their offset (departure time) to assist in finding valid trips
 	}
 	
-	public ArrayList<Trip> getValidTrips(String start,String end)
-	{
+	public ArrayList<Trip> getValidTrips(String start,String end)	//NOTE: this algorithm may not find all valid paths if there are two or more valid subpaths that travel through the same intermediary node
+	{																//However, the number of nodes for this program might be small enough that this may not be an issue
 		if(start.equals(end))
 			return null;
 		
@@ -56,7 +56,6 @@ public class FlightService {
 				else
 				{
 					trip = findConnectingFlights(f.getOffset()+f.getFlightTime()+1,f.getDestination(),end,trip);
-					//trip.addAll(findConnectingFlights(f.getOffset()+f.getFlightTime()+1,f.getDestination(),end));
 					
 					if(trip.getLastStop().getDestination().equals(end))	//Double check to make sure the planned route would reach the proper destination
 					{
