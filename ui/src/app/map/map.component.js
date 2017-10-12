@@ -22,7 +22,7 @@ class MapController {
 
     console.log(cities['Chattanooga'])
 
-    let flightColors = ['#CC0099','#AA1100','#FF3388','#333388','#572072']
+    let flightColors = ['#CC0099','#AA1100','#FF3388','#FF9000','#228535']
 
     // add path from webservice   
     $map.getMarkerByCityName('Chattanooga')
